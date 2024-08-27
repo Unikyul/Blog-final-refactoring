@@ -4,12 +4,17 @@
     <div class="card">
         <div class="card-header"><b>글수정하기 화면입니다</b></div>
         <div class="card-body">
-            <form>
+            <!--
+            method 가 put 이라면 /update를 사용 할 필요가 없다. post는 동사를 걸어준다.
+            -->
+            <form action="/api/board/{{model.id}}/update" method="post">
                 <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Enter title" name="title" value="제목1">
+                    <input type="text" class="form-control" placeholder="Enter title" name="title"
+                           value="{{model.title}}">
                 </div>
-                <div class="mb-3">
-                    <textarea class="form-control" rows="5" name="content">내용1</textarea>
+                <div class=" mb-3">
+
+                    <textarea class="form-control" rows="5" name="content"> {{model.content}} </textarea>
                 </div>
                 <button class="btn btn-primary form-control">글수정하기완료</button>
             </form>

@@ -3,23 +3,35 @@
 <div class="container p-5">
 
     <!-- 수정삭제버튼 -->
-    <div class="d-flex justify-content-end">
-        <a href="/board/1/update-form" class="btn btn-warning me-1">수정</a>
-        <form>
-            <button class="btn btn-danger">삭제</button>
-        </form>
-    </div>
+    {{#model.isOwner}}
+        <div class="d-flex justify-content-end">
+            <a href="/api/board/{{model.boardId}}/update-form" class="btn btn-warning me-1">수정</a>
+
+            <!--
+            post를 쓰는 이유는 ajax,자바스크립트를 사용 하지 않고 기초적인 CRUD를 하기 위해
+            주소 설계 규칙 찾아보기
+            post로 쓰기,삭제,수정을 하기 위해 동사를 쓰지 않고 post를 쓴다.
+
+            method를 get으로 바꾸면 안 되는 이유 위험하다 그 이유는 하이퍼링크는 누구나 만들어 내고 동작 시킬 수 있기 때문에
+            누르는 순간 삭제를 할 수 있기 때문에
+
+            -->
+            <form action="/api/board/{{model.boardId}}/delete" method="post">
+                <button class="btn btn-danger">삭제</button>
+            </form>
+        </div>
+    {{/model.isOwner}}
 
     <div class="d-flex justify-content-end">
-        <b>작성자</b> : 익명
+        <b>작성자</b> : {{model.username}}
     </div>
 
     <!-- 게시글내용 -->
     <div>
-        <h2><b>제목1</b></h2>
+        <h2><b>{{model.title}}</b></h2>
         <hr/>
         <div class="m-4 p-2">
-            내용1
+            {{{model.content}}}
         </div>
     </div>
 </div>
